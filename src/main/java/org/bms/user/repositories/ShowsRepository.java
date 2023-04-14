@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ShowsRepository extends JpaRepository<Shows, Long >{
     Shows findByIdEquals(Long id);
-    List<Shows> findByMovie(Movie movie);
+    List<Shows> findFirstByMovie(Movie movie);
 
 }

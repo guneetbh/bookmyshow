@@ -110,8 +110,8 @@ public class BookMyShowApplication implements CommandLineRunner {
         List<Features> features2 = new ArrayList<>();
         features2.add(Features.TWO_D);
         // add auditorium
-        Auditorium audi1 = theatreController.addAuditorium("Screen 1", theatre, features, audiSeats);
-        //Auditorium audi2 =  theatreController.addAuditorium("Screen 2" , theatre, features2, audiSeats);
+        Auditorium audi1 = theatreController.addAuditorium("Screen 1", theatre1, features, audiSeats);
+        //Auditorium audi2 =  theatreController.addAuditorium("Screen 1" , theatre1, features, audiSeats);
         //theatreController.addAuditorium("Screen 1" , theatre1, features2, audiSeats);
 
 
@@ -146,10 +146,11 @@ public class BookMyShowApplication implements CommandLineRunner {
        if( movieScreenResponseDto.getStatus().equals("Success")){
           List<Theatre> theatres =  movieScreenResponseDto.getTheatres();
           for(Theatre theatre3: theatres){
-              System.out.println(theatre3.getTheatreName() + "||" + theatre3.getCompany());
-              for(Auditorium audi : theatre3.getAuditorium()){
-                  System.out.println("Auditorium Name: "+audi.getAudiName() );
-              }
+              System.out.println(movieScreenRequestDto.getCity() +"- "+theatre3.getTheatreName() + ",  " + theatre3.getCompany());
+
+//              for(Auditorium audi : theatre3.getAuditorium()){
+//                  System.out.println("Auditorium Name: "+audi.getAudiName() );
+//              }
           }
           List<Shows> movieShows =  movieScreenResponseDto.getShows();
           for (Shows shows: movieShows){

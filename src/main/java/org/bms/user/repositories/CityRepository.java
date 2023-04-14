@@ -11,7 +11,7 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City, Long> {
     City save(City city);
     City findCityById(Long Id);
-     City findByCityNameEquals(String City);
+     City findFirstByCityNameEquals(String City);
 
    //  City findAllByCity(City city);
 

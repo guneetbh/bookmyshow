@@ -89,12 +89,11 @@ System.out.println("Seats saved");
         MovieScreenResponseDto responseDto = new MovieScreenResponseDto();
         Movie _movie = movieRepository.findByMovieNameEquals(movie);
         //find Auditorium for the shows
-        City movieCity = cityRepository.findByCityNameEquals(city);
+        City movieCity = cityRepository.findFirstByCityNameEquals(city);
         List<Theatre> theatres  = movieCity.getTheatres();
 
-        List<Shows> movieShows = showsRepository.findByMovie(_movie);
-       // City cityTheatres = cityRepository.findAllByCity(movieCity);
-      //  List<Theatre> theatres=  cityTheatres.getTheatres();
+        List<Shows> movieShows = showsRepository.findFirstByMovie(_movie);
+
         for (Shows show: movieShows){
          Theatre theatre =  theatreRepository.findAllByAuditorium(show.getAuditorium());
 
