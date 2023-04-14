@@ -96,13 +96,26 @@ public class BookMyShowApplication implements CommandLineRunner {
                 (c -> c.getSeatTypeName().equals(seatTypePlat.getSeatTypeName())).findAny().get());
         Seats seatP_1 = new Seats(5, "6A", 6, savedSeats.stream().filter
                 (c -> c.getSeatTypeName().equals(seatTypePlat.getSeatTypeName())).findAny().get());
-
-
+        Seats seats3 = new Seats(1, "58L", 1, savedSeats.stream().filter
+                (c -> c.getSeatTypeName().equals(seatType.getSeatTypeName())).findAny().get());
+        Seats seats4 = new Seats(1, "59L", 1, savedSeats.stream().filter
+                (c -> c.getSeatTypeName().equals(seatType.getSeatTypeName())).findAny().get());
+        Seats seats5 = new Seats(1, "60L", 1, savedSeats.stream().filter
+                (c -> c.getSeatTypeName().equals(seatTypeGold.getSeatTypeName())).findAny().get());
+        Seats seats6 = new Seats(1, "61L", 1, savedSeats.stream().filter
+                (c -> c.getSeatTypeName().equals(seatTypePlat.getSeatTypeName())).findAny().get());
+        Seats seats7 = new Seats(1, "62L", 1, savedSeats.stream().filter
+                (c -> c.getSeatTypeName().equals(seatTypePlat.getSeatTypeName())).findAny().get());
         List<Seats> audiSeats = new ArrayList<>();
         audiSeats.add(seats1);
         audiSeats.add(seats2);
         audiSeats.add(seatG_1);
         audiSeats.add(seatP_1);
+        audiSeats.add(seats3);
+        audiSeats.add(seats4);
+        audiSeats.add(seats5);
+        audiSeats.add(seats6);
+        audiSeats.add(seats7);
         // Seats seatsCreated = theatreController.addSeats(audiSeats);
         List<Features> features = new ArrayList<>();
         features.add(Features.DOLBY);
@@ -129,14 +142,30 @@ public class BookMyShowApplication implements CommandLineRunner {
 
         //showSeat
         ShowSeat showSeat = new ShowSeat(ShowSeatStatus.AVAILABLE, seats1, savedShow);
-        ShowSeat ss_1 = showController.saveShowSeat(showSeat);
+        //ShowSeat ss_1 = showController.saveShowSeat(showSeat);
         ShowSeat showSeat1 = new ShowSeat(ShowSeatStatus.AVAILABLE, seats2, savedShow);
-        ShowSeat ss_2 = showController.saveShowSeat(showSeat1);
-
+        //ShowSeat ss_2 = showController.saveShowSeat(showSeat1);
+        ShowSeat ss_3 = new ShowSeat(ShowSeatStatus.AVAILABLE, seats3, savedShow);
+        ShowSeat ss_4 = new ShowSeat(ShowSeatStatus.AVAILABLE, seats4, savedShow);
+        ShowSeat ss_5= new ShowSeat(ShowSeatStatus.AVAILABLE, seats5, savedShow);
+        ShowSeat ss_6 = new ShowSeat(ShowSeatStatus.AVAILABLE, seats6, savedShow);
+        ShowSeat ss_7 = new ShowSeat(ShowSeatStatus.AVAILABLE, seats7, savedShow);
+        List<ShowSeat> saveShowSeats = new ArrayList<>();
+        saveShowSeats.add(showSeat);
+        saveShowSeats.add(showSeat1);
+        saveShowSeats.add(ss_3);
+        saveShowSeats.add(ss_4);
+        saveShowSeats.add(ss_5);
+        saveShowSeats.add(ss_6);
+        saveShowSeats.add(ss_7);
+        List<ShowSeat> shSeats = showController.saveShowSeat(saveShowSeats);
         List<Long> showSeats = new ArrayList<>();
-        showSeats.add(ss_1.getId());
-        showSeats.add(ss_2.getId());
-
+        int i =0;
+        for (ShowSeat sh: shSeats) {
+            showSeats.add(sh.getId());
+           if(i==1) break;
+           i++;
+        }
         System.out.println("#######Browse theatres currently running the movie in the given town#######");
         MovieScreenRequestDto movieScreenRequestDto = new MovieScreenRequestDto();
         movieScreenRequestDto.setCity("New Delhi");
@@ -182,5 +211,40 @@ public class BookMyShowApplication implements CommandLineRunner {
                 + "Seats: " );
                 responseDto.getBooking().getShowSeats().stream().forEach(seat -> System.out.println(seat.getSeats().getSeatName()));
         System.out.println("********Booking Info********");
+
+        //#############Scenerio 3 ################################//
+
+        Map<String, Long> showSeatIds = new HashMap<>();
+        for(ShowSeat showseat: shSeats){
+            showSeatIds.put(showseat.getSeats().getSeatName(), showseat.getId());
+     }
+        TicketBookRunner ticketBookRunner1 = new TicketBookRunner(
+                this.bookingController,
+                1L,
+                List.of(showSeatIds.get("58L"), showSeatIds.get("59L"), showSeatIds.get("60L")),
+                1L
+        );
+
+        TicketBookRunner ticketBookRunner2 = new TicketBookRunner(
+                this.bookingController,
+                1L,
+                List.of(showSeatIds.get("60L"), showSeatIds.get("61L"), showSeatIds.get("62L")),
+                1L
+        );
+
+        Thread t1 = new Thread(ticketBookRunner1);
+        Thread t2 = new Thread(ticketBookRunner2);
+        t1.start();
+        t2.start();
     }
 }
+
+/*
+(shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("58L")).findAny().get().getId()),
+                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("59L")).findAny().get().getId()),
+                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("60L")).findAny().get().getId())
+
+ (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("60L")).findAny().get().getId()),
+                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("61L")).findAny().get().getId()),
+                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("62L")).findAny().get().getId())
+ */

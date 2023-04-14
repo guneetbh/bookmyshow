@@ -12,6 +12,7 @@ public interface ShowService {
     Shows save(Shows show,  Map<SeatType, Double> seatTypes);
 
     ShowSeat saveShowSeat(ShowSeat showSeat);
+    List<ShowSeat> saveShowSeat(List<ShowSeat> showSeat);
 
     ShowSeatType saveShowSeatType(ShowSeatType showSeatType);
 }

@@ -47,7 +47,10 @@ public class ShowServiceImpl implements ShowService {
         ShowSeat savedShowSeat = showSeatRepository.save(showSeat);
         return savedShowSeat;
     }
-
+    public List<ShowSeat> saveShowSeat(List<ShowSeat> showSeat) {
+        List<ShowSeat> savedShowSeat = showSeatRepository.saveAll(showSeat);
+        return savedShowSeat;
+    }
     @Override
     public ShowSeatType saveShowSeatType(ShowSeatType showSeatType) {
         ShowSeatType savedShowSeatType = showSeatTypeRepository.save(showSeatType);

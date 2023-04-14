@@ -16,5 +16,5 @@ public interface ShowSeatRepository extends JpaRepository<ShowSeat, Long> {
 
     ShowSeat save(ShowSeat showSeat);
 
-
+    //List<ShowSeat> saveAll(List<ShowSeat> entities);
 }

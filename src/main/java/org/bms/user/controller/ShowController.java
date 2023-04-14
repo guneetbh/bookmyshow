@@ -28,6 +28,9 @@ public class ShowController {
         return showService.saveShowSeat(showSeat);
     }
 
+    public List<ShowSeat> saveShowSeat(List<ShowSeat> showSeat) {
+        return showService.saveShowSeat(showSeat);
+    }
     public ShowSeatType createShowSeats(ShowSeatType showSeatType) {
             return  showService.saveShowSeatType(showSeatType);
     }
