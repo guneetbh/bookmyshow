@@ -1,4 +1,4 @@
-##High Level Design of booking platform
+## High Level Design of booking platform
 ![Booking platform HLD](images/BMS-HLD.png)
 ## Class Diagram
 ![Booking Platform Class Diagram](images/BMS-ClassDiagram.png)
