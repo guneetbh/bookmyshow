@@ -213,6 +213,7 @@ public class BookMyShowApplication implements CommandLineRunner {
         System.out.println("********Booking Info********");
 
         //#############Scenerio 3 ################################//
+        //Same seats shall not be booked by two user for the same movie show//
 
         Map<String, Long> showSeatIds = new HashMap<>();
         for(ShowSeat showseat: shSeats){
@@ -238,13 +239,3 @@ public class BookMyShowApplication implements CommandLineRunner {
         t2.start();
     }
 }
-
-/*
-(shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("58L")).findAny().get().getId()),
-                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("59L")).findAny().get().getId()),
-                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("60L")).findAny().get().getId())
-
- (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("60L")).findAny().get().getId()),
-                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("61L")).findAny().get().getId()),
-                        (shSeats.stream().filter(c -> c.getSeats().getSeatName().equals("62L")).findAny().get().getId())
- */
