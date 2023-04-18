@@ -1,10 +1,10 @@
 ## High Level Design of booking platform
-![Booking platform HLD](images/BMS-HLD.png)
+[Booking platform HLD](images/BMS-HLD.png)
 ## Class Diagram
-![Booking Platform Class Diagram](images/BMS-ClassDiagram.png)
+[Booking Platform Class Diagram](images/BMS-ClassDiagram.png)
 
 ## ER DIAGRAM
-![Booking Platform Schema Design](images/BMS-ER.png)
+[Booking Platform Schema Design](images/BMS-ER.png)
 ... 
 ## Database - mysql
 
